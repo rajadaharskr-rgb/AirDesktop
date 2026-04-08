@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AirForShare Clone - Local Wi-Fi Virtual Desktop</title>
+  
+  <!-- Modern Font: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Phosphor Icons (Lightweight modern icons) -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Animated Background -->
+  <div class="area" >
+    <ul class="circles">
+      <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
+    </ul>
+  </div>
+
+  <div class="app-container">
+    <header class="navbar glass-panel">
+      <div class="logo">
+        <i class="ph ph-wifi-high"></i>
+        <h1>AirDesktop</h1>
+      </div>
+      <div class="status">
+        <span id="connection-status" class="status-indicator disconnected"></span>
+        <span id="status-text">Connecting...</span>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <!-- Text Sync Panel -->
+      <section class="panel text-panel glass-panel">
+        <div class="panel-header">
+          <h2><i class="ph ph-text-align-left"></i> Shared Text</h2>
+          <button id="copy-text-btn" class="icon-btn" title="Copy to clipboard">
+            <i class="ph ph-copy"></i>
+          </button>
+        </div>
+        <textarea id="shared-text" placeholder="Type or paste text here to share it instantly with everyone on your Wi-Fi..."></textarea>
+        <div class="panel-footer">
+          <span class="info"><i class="ph ph-info"></i> Syncs automatically</span>
+        </div>
+      </section>
+
+      <!-- File Share Panel -->
+      <section class="panel file-panel glass-panel">
+        <div class="panel-header">
+          <h2><i class="ph ph-files"></i> Shared Files</h2>
+          <button class="icon-btn primary" id="upload-trigger" title="Upload File">
+            <i class="ph ph-upload-simple"></i>
+          </button>
+          <input type="file" id="file-input" multiple hidden>
+        </div>
+
+        <div id="drop-zone" class="drop-zone">
+          <div class="drop-content">
+            <i class="ph ph-cloud-arrow-up"></i>
+            <p>Drag & drop files here</p>
+            <span>or click the upload button</span>
+          </div>
+        </div>
+
+        <!-- Upload Progress Area -->
+        <div id="upload-progress-container" class="upload-progress-container hidden">
+           <div class="progress-info">
+             <span class="filename" id="progress-filename">uploading...</span>
+             <span class="percentage" id="progress-percentage">0%</span>
+           </div>
+           <div class="progress-bar-bg">
+             <div class="progress-bar" id="progress-bar-fill"></div>
+           </div>
+        </div>
+
+        <!-- File List -->
+        <div class="file-list-container">
+          <ul id="file-list" class="file-list">
+            <!-- File items will be inserted here dynamically -->
+            <li class="empty-state">No files shared yet. Be the first!</li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>Accessible only to devices on your local Wi-Fi network.</p>
+    </footer>
+  </div>
+
+  <!-- Socket.IO Client -->
+  <script src="/socket.io/socket.io.js"></script>
+  <!-- Main App Logic -->
+  <script src="app.js"></script>
+</body>
+</html>
